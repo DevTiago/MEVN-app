@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <Homepage msg="Welcome to Your Vue.js App" />
+    <NavBarComponent></NavBarComponent>
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import Homepage from "./components/Homepage.vue";
+import NavBarComponent from "./partials/NavBar";
 
 export default {
   name: "App",
   components: {
-    Homepage,
+    NavBarComponent,
   },
 };
 </script>
@@ -20,8 +23,11 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: #f7f7f8;
+}
+
+.container {
+  padding-top: 20px;
 }
 </style>

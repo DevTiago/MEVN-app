@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const PORT = 8001;
+const PORT = 8080;
 
 app.use(cors);
 app.use(bodyParser.json());
@@ -18,8 +18,6 @@ mongoose
   .connect(process.env.mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
   })
   .then(() => console.log("MongoDB database connected"))
   .catch((err) => console.log("Database connection error: " + err));
@@ -28,3 +26,9 @@ mongoose.Promise = global.Promise;
 app
   .listen(PORT, () => console.log(`APP listen at port ${PORT}`))
   .on("error", (err) => console.log("Server Error: " + err));
+
+// Routes
+
+app.get("/", (req, res) => {
+  res.send("Ok!");
+});
