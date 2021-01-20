@@ -1,17 +1,14 @@
+const express = require("express");
+const authRoutes = require("./routes/auth");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 
-const express = require("express");
-const router = express.Router();
-
+//setup express app
 const app = express();
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-
-const PORT = 8080;
-
-app.use(cors);
-app.use(bodyParser.json());
+// app.use(cors);
+const PORT = 8090;
 
 // connect to mongoDB
 mongoose
@@ -23,12 +20,12 @@ mongoose
   .catch((err) => console.log("Database connection error: " + err));
 mongoose.Promise = global.Promise;
 
+// deal with body data
+app.use(bodyParser.json());
+
+// Routes
+app.use("/auth", authRoutes);
+
 app
   .listen(PORT, () => console.log(`APP listen at port ${PORT}`))
   .on("error", (err) => console.log("Server Error: " + err));
-
-// Routes
-
-app.get("/", (req, res) => {
-  res.send("Ok!");
-});
