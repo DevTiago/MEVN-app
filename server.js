@@ -8,7 +8,7 @@ require("dotenv").config();
 //setup express app
 const app = express();
 // app.use(cors);
-const PORT = 8090;
+const PORT = 8091;
 
 // connect to mongoDB
 mongoose

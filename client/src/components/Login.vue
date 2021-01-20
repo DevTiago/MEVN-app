@@ -1,6 +1,7 @@
 <template>
   <span>
-    <div v-if="showLoginForm" class="container d-flex justify-content center">
+    <!-- login form -->
+    <div v-if="showLoginForm" class="container d-flex justify-content-center">
       <div class="card mt-5 col-xl-6 col-md-8 col-12">
         <h2 class="card-title">Login</h2>
 
@@ -27,8 +28,8 @@
                 placeholder="Your password"
               />
             </div>
-            <button @click="login">Login</button>
           </div>
+          <button @click="login">Login</button>
           <p class="text-center mt-2 newAccount">
             Or create a new account
             <span @click="toggleForm" class="link">here</span>
@@ -46,7 +47,7 @@
           <div class="formGroup">
             <label>Name:</label>
             <div class="formGroupWrapper">
-              <b-icon-user></b-icon-user>
+              <b-icon-person></b-icon-person>
               <input
                 type="text"
                 v-mode="registerForm.name"
@@ -54,49 +55,47 @@
                 autocomplete="disable"
               />
             </div>
+          </div>
 
-            <div class="formGroup">
-              <label>Email:</label>
-              <div class="formGroupWrapper">
-                <b-icon-envelope></b-icon-envelope>
-                <input
-                  type="text"
-                  v-mode="registerForm.email"
-                  placeholder="Your email"
-                  autocomplete="disable"
-                />
-              </div>
-            </div>
-
-            <div class="formGroup">
-              <label>Password:</label>
-              <div class="formGroupWrapper">
-                <b-icon-key></b-icon-key>
-                <input
-                  type="password"
-                  v-mode="registerForm.password"
-                  placeholder="Your password"
-                  autocomplete="disable"
-                />
-              </div>
-            </div>
-
-            <div class="formGroup">
-              <label>Confirm Password:</label>
-              <div class="formGroupWrapper">
-                <b-icon-key></b-icon-key>
-                <input
-                  type="password"
-                  v-mode="registerForm.confirmationPassword"
-                  placeholder="Confirm your password"
-                  autocomplete="disable"
-                />
-              </div>
+          <div class="formGroup">
+            <label>Email:</label>
+            <div class="formGroupWrapper">
+              <b-icon-envelope></b-icon-envelope>
+              <input
+                type="text"
+                v-mode="registerForm.email"
+                placeholder="Your email"
+                autocomplete="disable"
+              />
             </div>
           </div>
 
-          <button @click="signup">Register</button>
+          <div class="formGroup">
+            <label>Password:</label>
+            <div class="formGroupWrapper">
+              <b-icon-key></b-icon-key>
+              <input
+                type="password"
+                v-mode="registerForm.password"
+                placeholder="Your password"
+                autocomplete="disable"
+              />
+            </div>
+          </div>
 
+          <div class="formGroup">
+            <label>Confirm Password:</label>
+            <div class="formGroupWrapper">
+              <b-icon-key></b-icon-key>
+              <input
+                type="password"
+                v-mode="registerForm.confirmationPassword"
+                placeholder="Confirm your password"
+                autocomplete="disable"
+              />
+            </div>
+          </div>
+          <button @click="signup">Register</button>
           <p class="text-center mt-2">
             Already have an acount? Login
             <span class="link" @click="toggleForm">here</span>
@@ -108,8 +107,15 @@
 </template>
 
 <script>
+import { BIconKey, BIconEnvelope, BIconPerson } from "bootstrap-vue";
+
 export default {
   name: "Login",
+  components: {
+    BIconKey,
+    BIconEnvelope,
+    BIconPerson,
+  },
   data() {
     return {
       showLoginForm: true,
@@ -167,16 +173,16 @@ export default {
       color: #a7a7a7;
     }
     .formGroupWrapper {
-      position: relative;
+      display: flex;
+      align-items: center;
       input {
-        padding: 10px;
+        padding: 10px 0;
+        margin-left: 10px;
         width: 100%;
         height: 50%;
-        line-height: 50px;
         border: 0;
         border-bottom: 1px solid #c7c7c7;
         color: #606060;
-        text-indent: 2rem;
         &::placeholder {
           color: #a7a7a7;
         }
@@ -201,6 +207,7 @@ export default {
     width: 100%;
     height: 36px;
     line-height: 36px;
+
     padding: 0 2rem;
     font-size: 0.875rem;
     border-radius: 18px;
