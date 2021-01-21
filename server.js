@@ -8,7 +8,7 @@ require("dotenv").config();
 //setup express app
 const app = express();
 // app.use(cors);
-const PORT = 8091;
+const PORT = 5050;
 
 // connect to mongoDB
 mongoose
@@ -21,7 +21,7 @@ mongoose
 mongoose.Promise = global.Promise;
 
 // deal with body data
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/auth", authRoutes);

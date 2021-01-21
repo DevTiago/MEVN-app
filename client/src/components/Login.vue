@@ -50,7 +50,7 @@
               <b-icon-person></b-icon-person>
               <input
                 type="text"
-                v-mode="registerForm.name"
+                v-model="registerForm.name"
                 placeholder="Your name"
                 autocomplete="disable"
               />
@@ -63,7 +63,7 @@
               <b-icon-envelope></b-icon-envelope>
               <input
                 type="text"
-                v-mode="registerForm.email"
+                v-model="registerForm.email"
                 placeholder="Your email"
                 autocomplete="disable"
               />
@@ -76,7 +76,7 @@
               <b-icon-key></b-icon-key>
               <input
                 type="password"
-                v-mode="registerForm.password"
+                v-model="registerForm.password"
                 placeholder="Your password"
                 autocomplete="disable"
               />
@@ -89,13 +89,13 @@
               <b-icon-key></b-icon-key>
               <input
                 type="password"
-                v-mode="registerForm.confirmationPassword"
+                v-model="registerForm.confirmationPassword"
                 placeholder="Confirm your password"
                 autocomplete="disable"
               />
             </div>
           </div>
-          <button @click="signup">Register</button>
+          <button @click="register">Register</button>
           <p class="text-center mt-2">
             Already have an acount? Login
             <span class="link" @click="toggleForm">here</span>
@@ -107,6 +107,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import { BIconKey, BIconEnvelope, BIconPerson } from "bootstrap-vue";
 
 export default {
@@ -118,6 +119,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       showLoginForm: true,
       errorMsg: null,
       loginForm: {
@@ -148,7 +150,26 @@ export default {
 
     login() {},
 
-    signin() {},
+    register() {
+      this.loading = true;
+
+      if (
+        this.registerForm.password != this.registerForm.confirmationPassword
+      ) {
+        this.errorMsg = "Passoword does not match!";
+        return false;
+      }
+
+      axios
+        .post("http://localhost:5050/auth/newuser", {
+          name: this.registerForm.name,
+          email: this.registerForm.email,
+          password: this.registerForm.password,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    },
   },
 };
 </script>
