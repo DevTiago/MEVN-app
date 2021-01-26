@@ -2,7 +2,8 @@ const express = require("express");
 const authRoutes = require("./routes/auth");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const cors = require("cors");
+
+// const cors = require("cors");
 require("dotenv").config();
 
 //setup express app
@@ -12,7 +13,7 @@ const PORT = 5050;
 
 // connect to mongoDB
 mongoose
-  .connect(process.env.mongoUri, {
+  .connect(process.env.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
